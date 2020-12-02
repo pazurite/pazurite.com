@@ -1,0 +1,25 @@
+// Margin and Padding
+
+@each $prop, $abbrev in (margin: m, padding: p) {
+  $reversed-breakpoints: reverse($breakpoints);
+
+  @each $size, $length in map-get($spacers, xl) {
+    @include spacing($size, $abbrev, $prop, $length);
+  }
+
+  @each $breakpoint, $viewport in $reversed-breakpoints {
+    @include breakpoint-down($breakpoint) {
+      @if (map-has-key($spacers, $breakpoint)) {
+        $spacer-by-breakpoint: map-get($spacers, $breakpoint);
+
+        @if type-of($spacer-by-breakpoint) == 'map' {
+          @each $size, $length in $spacer-by-breakpoint {
+            @include spacing($size, $abbrev, $prop, $length);
+          }
+        }
+      }
+    }
+  }
+
+  @include spacing('a', $abbrev, $prop, auto);
+}

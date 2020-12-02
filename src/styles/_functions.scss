@@ -1,0 +1,38 @@
+@function reverse($map) {
+  $result: '';
+  @if type-of($map) == 'map' {
+    $keys: map-keys($map);
+    $map-reversed: ();
+
+    @for $i from length($keys) through 1 {
+      $map-reversed: map-merge(
+        $map-reversed,
+        (
+          nth($keys, $i): map-get($map, nth($keys, $i))
+        )
+      );
+    }
+
+    @if type-of($map-reversed) == 'map' {
+      $result: $map-reversed;
+    } @else {
+      @warn 'There was an error reversing the order of "#{$map}"';
+    }
+  } @else {
+    @warn '"#{$map}" is not a valid map';
+  }
+
+  @return $result;
+}
+
+@function color($name) {
+  @if map-has-key($palette, $name) {
+    @return map-get($palette, $name);
+  }
+  @else {
+    @error 'ERROR: Specified color #{$name} does not exist in the palette';
+  }
+}
+
+
+

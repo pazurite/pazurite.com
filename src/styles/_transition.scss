@@ -1,0 +1,104 @@
+.slide-left {
+  &-enter-active {
+    animation: slideInLeft 0.1s $ease-in-quint both;
+  }
+}
+
+.slide-right {
+  &-enter-active {
+    animation: slideInRight 0.2s $ease-in-quint both;
+  }
+}
+
+.slide-down {
+  &-enter-active {
+    animation: slideInUp 0.2s $ease-in-cubic both;
+  }
+  &-leave-active {
+    animation: slideOutDown 0.1s $ease-in-cubic both;
+  }
+}
+
+.fade {
+  &-enter {
+    opacity: 0;
+  }
+  &-enter-active {
+    animation: fadeInDown 0.25s $ease-in-quad both;
+  }
+}
+
+.expand {
+  &-enter-active {
+    animation: expand 0.2s $ease-in-quad both;
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    transform: translate3d(0, -40px, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translate3d(-50%, 0, 0);
+    opacity: 0.5;
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translate3d(50%, 0, 0);
+    opacity: 0.5;
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translate3d(0, -100%, 0);
+    opacity: 0;
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutDown {
+  from {
+    transform: translate3d(0, -10%, 0);
+    opacity: 1;
+  }
+
+  to {
+    transform: translate3d(0, 50%, 0);
+    opacity: 0;
+  }
+}
+
+@keyframes expand {
+  0% {
+    max-height: 0;
+    overflow: hidden;
+  }
+  100% {
+    max-height: 100vh;
+  }
+}

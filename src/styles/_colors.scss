@@ -1,0 +1,16 @@
+$blue: #09aeea;
+
+$green: #21e1ae;
+
+$white: #ffffff;
+
+$palette: (
+  primary: $blue,
+  secondary: $green,
+        white: $white,
+);
+
+@include css-generator($palette, color);
+@include css-generator($palette, fill);
+@include css-generator($palette, bgcolor, background-color);
+@include css-generator($palette, border-color);

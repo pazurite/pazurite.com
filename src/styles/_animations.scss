@@ -1,0 +1,67 @@
+.animation--clockwise {
+  -webkit-animation: clockwise 30s linear infinite normal;
+  animation: clockwise 30s linear infinite normal;
+}
+
+.animation--anti-clockwise {
+  -webkit-animation: anti-clockwise 30s linear infinite normal;
+  animation: anti-clockwise 30s linear infinite normal;
+}
+
+.animation--rotating {
+  -webkit-animation: rotating 15s linear infinite normal;
+  animation: rotating 15s linear infinite normal;
+}
+
+.animation--rotating-diagonal {
+  -webkit-animation: rotating-diagonal 15s linear infinite alternate;
+  animation: rotating-diagonal 15s linear infinite alternate;
+}
+
+.animation {
+  transform-style: preserve-3d;
+}
+
+@keyframes clockwise {
+  0% {
+    -webkit-transform: rotate(0) translate(-165px) rotate(0);
+    transform: rotate(0) translate(-165px) rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(360deg) translate(-165px) rotate(-360deg);
+    transform: rotate(360deg) translate(-165px) rotate(-360deg);
+  }
+}
+
+@keyframes anti-clockwise {
+  0% {
+    -webkit-transform: rotate(0) translate(165px) rotate(0);
+    transform: rotate(0) translate(165px) rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(-360deg) translate(165px) rotate(360deg);
+    transform: rotate(-360deg) translate(165px) rotate(360deg);
+  }
+}
+
+@keyframes rotating {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(-360deg);
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes rotating-diagonal {
+  0% {
+    -webkit-transform: translate(-300px, 150px) rotate(0);
+    transform: translate(-300px, 150px) rotate(0);
+  }
+  100% {
+    -webkit-transform: translate(300px, -150px) rotate(180deg);
+    transform: translate(300px, -150px) rotate(180deg);
+  }
+}

@@ -16,11 +16,22 @@ module.exports = merge(commonConfig, {
   module: {
     rules: [
       {
-        test: /\.(sc|sa|c)ss$/,
+        test: /\.(css|scss)$/,
         use: [
           'vue-style-loader',
-          { loader: 'css-loader', options: { sourceMap: true } },
-          { loader: 'sass-loader', options: { sourceMap: true } },
+          { loader: 'css-loader', options: { esModule: false } },
+          {
+            loader: 'sass-loader',
+            options: {
+              additionalData: `
+                  @import '@/styles/_mixins.scss';
+                  @import '@/styles/_functions.scss';
+                  @import '@/styles/_colors.scss';
+                  @import '@/styles/_variables.scss';
+                  @import '@/styles/_easing.scss';       
+              `,
+            },
+          },
         ],
       },
     ],

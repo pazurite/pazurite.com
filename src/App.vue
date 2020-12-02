@@ -1,22 +1,13 @@
 <template>
-  <div>
-    <router-link to="/">
-      Home
-    </router-link>
-    |
-    <router-link to="/medium">
-      Medium
-    </router-link>
-    <router-view/>
-
-    <app-banner />
-  </div>
+  <default-layout>
+    <router-view />
+  </default-layout>
 </template>
 
-<script>
-import AppBanner from "@/components/AppBanner";
+<script lang="ts">
+import DefaultLayout from '@c/layouts/DefaultLayout.vue';
 
 export default {
-  components: {AppBanner}
-}
+  components: { DefaultLayout },
+};
 </script>

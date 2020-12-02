@@ -1,0 +1,9 @@
+@include css-generator($white-spaces, white-space);
+
+@include css-generator($word-break, word-break);
+
+@include css-generator($font-weight, font-weight);
+
+@include css-generator($alignments, alignment, text-align);
+
+@include type-scale-generator();

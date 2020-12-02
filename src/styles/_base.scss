@@ -1,0 +1,98 @@
+.theme--light.v-application {
+  background-color: white;
+  font-family: map-get($font-families, roboto);
+}
+
+main {
+  display: flex;
+  flex: 1;
+}
+
+.v-overlay {
+  z-index: map-get($z-layers, modal) !important;
+}
+.v-menu__content .v-list-item {
+  padding: 8px 12px;
+  @include breakpoint-down(sm) {
+    padding: 4px 8px;
+  }
+}
+
+.error {
+  $error-color: map-get($palette, danger);
+
+  &--text {
+    color: $error-color;
+    caret-color: $error-color;
+  }
+}
+
+.panel {
+  background-color: $white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 20px 0 rgba(57, 58, 70, 0.08);
+}
+
+.span {
+  &-2 {
+    grid-column: span 2;
+    @include breakpoint-down(sm) {
+      grid-column: 1;
+    }
+  }
+  &-3 {
+    grid-column: span 3;
+    @include breakpoint-down(sm) {
+      grid-column: 1;
+    }
+  }
+
+  &-r-2 {
+    grid-row: span 2;
+  }
+}
+
+.ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 100%;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+.clickable {
+  cursor: pointer;
+}
+.flex {
+  display: flex;
+}
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+.block {
+  width: 100%;
+}
+.underline {
+  text-decoration: underline;
+}
+.hidden {
+  opacity: 0;
+}
+.overflow-y-hidden {
+  // disable scroll when navigation drawer activated
+  overflow-y: hidden !important;
+}
+.fb_dialog {
+  transition: all 200ms ease-in;
+
+  &.has-bottom-bar {
+    @include breakpoint-down(sm) {
+      transform: translateY(-70px);
+    }
+  }
+}
+
+@include css-generator($z-layers, z, z-index);

@@ -8,14 +8,17 @@ const { resolveRoot } = require('./helpers');
 
 module.exports = {
   entry: {
-    main: resolveRoot('src/main.js'),
+    main: resolveRoot('src/main.ts'),
   },
   resolve: {
     alias: {
       vue$: 'vue/dist/vue.esm.js',
+      '@c': resolveRoot('src/app/core'),
+      '@m': resolveRoot('src/app/modules'),
+      '@s': resolveRoot('src/app/shared'),
       '@': resolveRoot('src'),
     },
-    extensions: ['.mjs', '.js', '.jsx', '.vue', '.json', '.wasm'],
+    extensions: ['.vue', '.js', '.jsx', '.tsx', '.ts', '.json', '.mjs', '.wasm'],
   },
   module: {
     rules: [
@@ -25,7 +28,6 @@ module.exports = {
       },
       {
         test: /\.(j|t)sx?$/,
-        include: [resolveRoot('src')],
         exclude: /node_modules/,
         loader: 'babel-loader',
       },
@@ -90,4 +92,7 @@ module.exports = {
       statsOptions: { source: false },
     }),
   ],
+  experiments: {
+    topLevelAwait: true,
+  },
 };
