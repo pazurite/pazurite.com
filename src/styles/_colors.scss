@@ -4,10 +4,24 @@ $green: #21e1ae;
 
 $white: #ffffff;
 
+$dark: #353353;
+$dark-2: #302f4e;
+
+$yellow: #ffd15c;
+
+$violet: #6c6ce5;
+
+$red: #ff4c60;
+
 $palette: (
   primary: $blue,
   secondary: $green,
-        white: $white,
+  white: $white,
+  dark: $dark,
+  dark-2: $dark-2,
+  yellow: $yellow,
+  violet: $violet,
+  red: $red,
 );
 
 @include css-generator($palette, color);

@@ -1,15 +1,15 @@
-import { pixel } from '@/utils/common.ts';
+import { pixel } from "@/utils/common.ts";
 
 // Key which we use to store directive object on element
-export const ASPECT_RATIO_CACHED_PROPERTY = '__aspectRatio__';
+export const ASPECT_RATIO_CACHED_PROPERTY = "__aspectRatio__";
 
 export default {
-  bind(el, { value }) {
+  bind(el: HTMLElement, { value }) {
     const pattern = /^\d+:\d+$/;
 
     if (!value) return;
 
-    if (typeof value !== 'string') {
+    if (typeof value !== "string") {
       throw new Error(
         `Expected directive binding value type to be a string but found a ${typeof value} instead`
       );
@@ -24,34 +24,34 @@ export default {
     // Define handler and cache it on the element
     const handler = computeDimension.bind(null, el, value);
 
-    window.addEventListener('resize', handler);
+    window.addEventListener("resize", handler);
 
     el[ASPECT_RATIO_CACHED_PROPERTY] = {
-      handler
+      handler,
     };
   },
 
-  inserted(el, { value }) {
+  inserted(el: HTMLElement, { value }) {
     if (!value) return;
 
     computeDimension(el, value);
   },
 
-  unbind(el, { value }) {
+  unbind(el: HTMLElement, { value }) {
     if (!value) return;
 
     const { handler } = el[ASPECT_RATIO_CACHED_PROPERTY];
 
-    window.removeEventListener('resize', handler);
+    window.removeEventListener("resize", handler);
 
     delete el[ASPECT_RATIO_CACHED_PROPERTY];
-  }
+  },
 };
 
-function computeDimension(el, value) {
+function computeDimension(el: HTMLElement, value) {
   if (!el) return;
 
-  const [aspectWidth = 0, aspectHeight = 0] = value.split(':');
+  const [aspectWidth = 0, aspectHeight = 0] = value.split(":");
 
   const aspectRatio = (aspectHeight / aspectWidth) * 100;
 
@@ -59,6 +59,6 @@ function computeDimension(el, value) {
 
   const containerHeight = (computedWidth * aspectRatio) / 100;
 
-  el.style.height = pixel(containerHeight);
-  el.style.maxHeight = pixel(containerHeight);
+  el.style.height = <string>pixel(containerHeight);
+  el.style.maxHeight = <string>pixel(containerHeight);
 }

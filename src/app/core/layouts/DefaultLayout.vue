@@ -1,34 +1,45 @@
 <template>
-  <main class="default-layout">
+  <div class="default-layout">
     <page-container>
-      <my-info />
+      <main class="main">
+        <my-info />
 
-      <slot />
+        <slot />
+      </main>
     </page-container>
-  </main>
+  </div>
 </template>
 
 <script>
-import PageContainer from '@s/components/PageContainer.vue';
-import MyInfo from '@c/views/MyInfo.vue';
+import PageContainer from "@s/components/PageContainer.vue";
+import MyInfo from "@c/views/MyInfo.vue";
 
 export default {
   components: { MyInfo, PageContainer },
 };
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
 .default-layout {
   display: flex;
   height: 100%;
-  min-height: 100vh;
+  max-height: 100vh;
 
   padding: 10vh 0;
 
   background: linear-gradient(color(secondary), color(primary));
 }
 
-p {
-  color: red;
+.main {
+  display: grid;
+  grid-template-columns: minmax(0, 0.4fr) minmax(0, 0.6fr);
+
+  height: 100%;
+
+
+
+  background-color: color(dark);
+  border-radius: 32px;
+  overflow: hidden;
 }
 </style>

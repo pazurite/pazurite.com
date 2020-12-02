@@ -1,15 +1,14 @@
-import { unitFormatter } from '@/utils/formatter';
-import { isTouchScreen } from '@/utils/validator';
-import { css } from '@/utils/common.ts';
+import { isTouchScreen } from "@/utils/validator";
+import { css, pixel } from "@/utils/common.ts";
 
-const CACHED_PROPERTY = '__ripple__';
+const CACHED_PROPERTY = "__ripple__";
 
 const RippleConfig = {
-  color: 'dark',
+  color: "dark",
   radius: null,
   centered: false,
   boundary: false,
-  duration: 450
+  duration: 450,
 };
 
 let previousElementStyles = {};
@@ -18,15 +17,15 @@ function getTriggerEvents() {
   const _triggerEvents = new Map();
 
   if (isTouchScreen()) {
-    _triggerEvents.set('touchstart', showRipple);
+    _triggerEvents.set("touchstart", showRipple);
   } else {
-    _triggerEvents.set('mousedown', showRipple);
+    _triggerEvents.set("mousedown", showRipple);
   }
 
   return _triggerEvents;
 }
 
-function setupTriggerEvents(el) {
+function setupTriggerEvents(el: HTMLElement) {
   const triggerEvents = getTriggerEvents();
 
   triggerEvents.forEach((fn, type) => {
@@ -42,25 +41,25 @@ function removeTriggerEvents(el) {
   });
 }
 
-function showRipple(event) {
+function showRipple(event: Event) {
   const { el, config, offsetX, offsetY, diameter, radius } = processTriggerEvent(event);
 
-  const ripple = document.createElement('div');
+  const ripple = document.createElement("div");
 
   css(ripple, {
     position: `absolute`,
-    left: unitFormatter(offsetX - radius, 'pixel'),
-    top: unitFormatter(offsetY - radius, 'pixel'),
-    height: unitFormatter(diameter, 'pixel'),
-    width: unitFormatter(diameter, 'pixel'),
+    left: pixel(offsetX - radius),
+    top: pixel(offsetY - radius),
+    height: pixel(diameter),
+    width: pixel(diameter),
     borderRadius: `100%`,
     opacity: 0,
     pointerEvents: `none`,
     transform: `scale3d(.2,.2,1)`,
-    transition: `transform, opacity 0 cubic-bezier(0.4, 0, 0.2, 1)`
+    transition: `transform, opacity 0 cubic-bezier(0.4, 0, 0.2, 1)`,
   });
 
-  ripple.classList.add('base-ripple', `bgcolor--${config.color}`);
+  ripple.classList.add("base-ripple", `bgcolor--${config.color}`);
 
   el.appendChild(ripple);
 
@@ -78,14 +77,14 @@ function showRipple(event) {
     previousElementStyles = { position, overflow };
 
     css(el, {
-      overflow: 'hidden'
+      overflow: "hidden",
     });
   }
 
   css(ripple, {
     transitionDuration: `${config.duration}ms`,
     transform: `scale3d(1,1,1)`,
-    opacity: 0.25
+    opacity: 0.25,
   });
 
   setTimeout(() => {
@@ -107,7 +106,7 @@ function hideRipple(ripple) {
 
   css(ripple, {
     transitionDuration: `${exitDuration}ms`,
-    opacity: 0
+    opacity: 0,
   });
 
   setTimeout(() => {
@@ -116,8 +115,8 @@ function hideRipple(ripple) {
   }, exitDuration);
 }
 
-function processTriggerEvent(event) {
-  const el = event.currentTarget;
+function processTriggerEvent(event: MouseEvent) {
+  const el = <Record<string, any>>event.currentTarget;
 
   const { config, activeRipples } = el[CACHED_PROPERTY];
 
@@ -146,10 +145,10 @@ function processTriggerEvent(event) {
 /**
  * Enforces a style recalculation of a DOM element by computing it's styles.
  */
-function enforceStyleRecalculation(element) {
+function enforceStyleRecalculation(element: HTMLElement) {
   // Enforce a style recalculation by calling `getComputedStyle` and accessing any property.
   // Calling `getPropertyValue` is important to let optimizers know that this is not a noop.
-  window.getComputedStyle(element).getPropertyValue('opacity');
+  window.getComputedStyle(element).getPropertyValue("opacity");
 }
 
 /**
@@ -162,18 +161,18 @@ function distanceToFurthestCorner(x, y, rect) {
 }
 
 export default {
-  bind(el, { value = {} }) {
+  bind(el: Record<string, any>, { value = {} }) {
     el[CACHED_PROPERTY] = {
       activeRipples: new Set(),
       config: {
         ...RippleConfig,
-        ...value
-      }
+        ...value,
+      },
     };
 
     setupTriggerEvents(el);
   },
-  unbind(el) {
+  unbind(el: HTMLElement) {
     removeTriggerEvents(el);
-  }
+  },
 };

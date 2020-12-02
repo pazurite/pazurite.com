@@ -1,6 +1,6 @@
-@mixin breakpoint-scale($size, $scale: 'down') {
+@mixin breakpoint-scale($size, $scale: "down") {
   $breakpoint: map-get($breakpoints, $size);
-  $media-feature: if($scale == 'down', max-width, min-width);
+  $media-feature: if($scale == "down", max-width, min-width);
 
   @if $breakpoint {
     @media screen and ($media-feature: map-get($breakpoints, $size) + px) {
@@ -14,13 +14,13 @@
 }
 
 @mixin breakpoint-down($size) {
-  @include breakpoint-scale($size, 'down') {
+  @include breakpoint-scale($size, "down") {
     @content;
   }
 }
 
 @mixin breakpoint-up($size) {
-  @include breakpoint-scale($size, 'up') {
+  @include breakpoint-scale($size, "up") {
     @content;
   }
 }
@@ -57,13 +57,13 @@
   }
 }
 
-@mixin size-generator($displays, $prefix: 'size', $props) {
+@mixin size-generator($displays, $prefix: "size", $props) {
   @each $size in $sizes {
     @if map-has-key($displays, $size) {
       $display: map-get($displays, $size);
 
-      .#{'' + $prefix}--#{$size} {
-        @if type-of($props) == 'list' {
+      .#{"" + $prefix}--#{$size} {
+        @if type-of($props) == "list" {
           @each $prop in $props {
             #{'' + $prop}: $display;
           }
@@ -76,17 +76,17 @@
 }
 
 @mixin css-generator($collection, $prefix: null, $props: null) {
-  @if type-of($collection) != 'map' and type-of($collection) != 'list' {
+  @if type-of($collection) != "map" and type-of($collection) != "list" {
     @error "'Error in 'enumStyle' mixin first paramter `$map` must be assigned a valid 'map' or 'list' type";
   } @else if $prefix == null {
     @error "'Error in 'enumStyle' mixin second paramter `$prefix` must be assigned a valid 'string' type";
   } @else {
-    @if type-of($collection) == 'map' {
+    @if type-of($collection) == "map" {
       @each $name, $value in $collection {
-        .#{$prefix}--#{'' + $name} {
+        .#{$prefix}--#{"" + $name} {
           @if ($props == null) {
             #{'' + $prefix}: $value;
-          } @else if type-of($props) == 'list' {
+          } @else if type-of($props) == "list" {
             @each $prop in $props {
               #{'' + $prop}: $value;
             }
@@ -97,10 +97,10 @@
       }
     } @else {
       @each $name in $collection {
-        .#{$prefix}--#{'' + $name} {
+        .#{$prefix}--#{"" + $name} {
           @if ($props == null) {
             #{'' + $prefix}: $name;
-          } @else if type-of($props) == 'list' {
+          } @else if type-of($props) == "list" {
             @each $prop in $props {
               #{'' + $prop}: $name;
             }
@@ -116,12 +116,12 @@
 @mixin type-scale-generator() {
   $reversed-breakpoints: reverse($breakpoints);
 
-  @each $size, $scale-ratio in map-get($type-scale, xl) {
+  @each $size, $scale-ratio in map-get($type-scale, default) {
     $value: max($font-base-size * $scale-ratio, $min-font-size);
 
     .fs--#{$size} {
       font-size: $value;
-      line-height: 1.5;
+      line-height: 1.2;
     }
   }
 
@@ -130,24 +130,24 @@
       @if (map-has-key($type-scale, $breakpoint)) {
         $type-by-breakpoint: map-get($type-scale, $breakpoint);
 
-        @if type-of($type-by-breakpoint) == 'map' {
+        @if type-of($type-by-breakpoint) == "map" {
           @each $size, $scale-ratio in $type-by-breakpoint {
             $value: max($font-base-size * $scale-ratio, $min-font-size);
 
             .fs--#{$size} {
               font-size: $value;
-              line-height: 1.5;
+              line-height: 1.2;
             }
           }
         }
 
         @if type_of($type-by-breakpoint) == number {
-          @each $size, $scale-ratio in map-get($type-scale, xl) {
-            $value: max($type-by-breakpoint * $scale-ratio, $min-font-size);
+          @each $size, $scale-ratio in map-get($type-scale, default) {
+            $value: max($font-base-size * $type-by-breakpoint * $scale-ratio, $min-font-size);
 
             .fs--#{$size} {
               font-size: $value;
-              line-height: 1.5;
+              line-height: 1.2;
             }
           }
         }

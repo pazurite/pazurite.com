@@ -1,0 +1,11 @@
+{
+  "framework": "vue",
+  "name": "vue-boilerplate",
+  "version": "1.0.0",
+  "contributions": {
+    "html": {
+      "description-markup": "markdown",
+      "types-syntax": "typescript"
+    }
+  }
+}

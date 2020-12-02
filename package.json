@@ -9,14 +9,17 @@
     "build-report": "webpack-bundle-analyzer --port 9700 dist/stats.json",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "prettier src --write",
-    "lint:style": "stylelint src"
+    "lint:style": "stylelint src",
+    "update-web-types": "vue-docgen-web-types"
   },
+  "web-types": "./web-types.json",
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "lodash": "^4.17.20",
     "vue": "^2.6.12",
+    "vue-docgen-web-types": "^0.1.7",
     "vue-router": "^3.4.8"
   },
   "devDependencies": {
@@ -33,6 +36,7 @@
     "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "^3.0.0",
     "compression-webpack-plugin": "^6.0.4",
+    "copy-webpack-plugin": "^6.3.2",
     "css-loader": "^5.0.0",
     "dotenv-webpack": "^4.0.0",
     "eslint": "^7.12.1",
